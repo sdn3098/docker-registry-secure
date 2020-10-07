@@ -25,6 +25,7 @@ example
 # mkdir -p /etc/dockercerts.d/repo.docker.local:5000
 
 # cp /docker-registry/certs/domain.crt /etc/dockercerts.d/repo.docker.local:5000/ca/crt
+# update-ca-certificates
 
 # vim /etc/hosts
    
