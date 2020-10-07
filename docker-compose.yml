@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  registry:
+    container_name: secure_registry
+    image: registry
+    ports:
+    - "5000:5000"
+    volumes:
+    - "${PWD}/certs/:/certs"
+    environment:
+    - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+    - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+
