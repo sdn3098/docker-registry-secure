@@ -99,7 +99,7 @@ services:
  ```bash
  # docker-compose up -d --force-recreate
  ```
- # Test Docker Registry Authentication:
+ ## Test Docker Registry Authentication:
  
  ```bash
 # docker login localhost:5000
