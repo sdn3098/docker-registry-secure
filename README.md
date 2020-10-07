@@ -20,6 +20,9 @@ Email Address []:
 ```
 
 ## Creating docker-compose file
+```bash
+# vim docker-compose.yml
+```
 
 ```yml
 version: '3'
