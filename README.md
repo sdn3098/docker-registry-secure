@@ -35,5 +35,5 @@ services:
     environment:
     - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
     - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
-    ```
+ 
     
