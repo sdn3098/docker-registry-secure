@@ -2,6 +2,8 @@
 ## Set or Change Hostname in CentOS/RHEL 7/8
 ```bash
 # hostnamectl set-hostname your-new-hostname
+example
+# hostname set-hostname repo.docker.local
 ```
 ## Creating SSL certificate
 ```bash
@@ -15,12 +17,25 @@ State or Province Name (full name) []:
 Locality Name (eg, city) [Default City]:
 Organization Name (eg, company) [Default Company Ltd]:
 Organizational Unit Name (eg, section) []:
-Common Name (eg, your name or your server's hostname) []: your-new-hostname
+Common Name (eg, your name or your server's hostname) []: repo.docker.local  ****your prefered hostname****
 Email Address []:
 ```
+```bash
+# mkdir -p /etc/docker/certs.d/<your-new-hostname:port>
+example
+# mkdir -p /etc/dockercerts.d/repo.docker.local:5000
 
+# cp /docker-registry/certs/domain.crt /etc/dockercerts.d/repo.docker.local:5000/ca/crt
+
+# vim /etc/hosts
+   
+   <your ip>  repo.docker.local
+   
+# systemctl restart doceker
+```
 ## Creating docker-compose file
 ```bash
+# mkdir /docker-registry/images
 # vim docker-compose.yml
 ```
 
@@ -35,6 +50,7 @@ services:
     - "5000:5000"
     volumes:
     - "${PWD}/certs/:/certs"
+    - "${PWD}/images/:/var/lib/registry"
     environment:
     - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
     - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
