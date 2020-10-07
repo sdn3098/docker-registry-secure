@@ -5,8 +5,8 @@
 ```
 ## Creating SSL certificate
 ```bash
-# mkdir -p /certs
-# openssl req -newkey rsa:4096 -nodes -sha256 -keyout /certs/domain.key -x509 -days 356 -out /certs/domain.crt
+# mkdir -p /docker-registry/certs
+# openssl req -newkey rsa:4096 -nodes -sha256 -keyout /docker-registry/certs/domain.key -x509 -days 356 -out /docker-registry/certs/domain.crt
 
 Generating a RSA private key
 
@@ -18,3 +18,22 @@ Organizational Unit Name (eg, section) []:
 Common Name (eg, your name or your server's hostname) []: your-new-hostname
 Email Address []:
 ```
+
+## Creating docker-compose file
+
+```yml
+version: '3'
+
+services:
+  registry:
+    container_name: secure_registry
+    image: registry
+    ports:
+    - "5000:5000"
+    volumes:
+    - "${PWD}/certs/:/certs"
+    environment:
+    - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+    - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+    ```
+    
