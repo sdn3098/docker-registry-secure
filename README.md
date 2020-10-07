@@ -1,4 +1,4 @@
-# Creating Secure Docker Registry Container 
+# Creating Secure Docker Registry Container with Self-Signed Certificate
 ## Set or Change Hostname in CentOS/RHEL 7/8
 ```bash
 # hostnamectl set-hostname your-new-hostname
