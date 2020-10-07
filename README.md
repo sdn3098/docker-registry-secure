@@ -19,8 +19,7 @@ Organization Name (eg, company) [Default Company Ltd]:
 Organizational Unit Name (eg, section) []:
 Common Name (eg, your name or your server's hostname) []: repo.docker.local  ****your prefered hostname****
 Email Address []:
-```
-```bash
+
 # mkdir -p /etc/docker/certs.d/<your-new-hostname:port>
 example
 # mkdir -p /etc/dockercerts.d/repo.docker.local:5000
