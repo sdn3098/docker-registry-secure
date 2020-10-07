@@ -1,4 +1,4 @@
-# Creating Secure Docker Registry Container with Self-Signed Certificate
+# Creating Secure Docker Registry Container with Self-Signed Certificate and Basic Authentication
 ## Set or Change Hostname in CentOS/RHEL 7/8
 ```bash
 # hostnamectl set-hostname your-new-hostname
@@ -64,4 +64,45 @@ services:
  # docker create alpine
  # docekr image tag alpine repo.docker.local:5000/alpine
  # docker push repo.docker.local:5000/alpine
-    
+ ```
+## Creating Basic Authentication
+```bash
+# yum install httpd-tools -y
+
+# mkdir /docker-registry/auth
+# cd auth 
+# htpasswd -Bc registry.password testuser
+```
+## Updating the docker-compose file:
+```bash
+# vim docker-compose.yml
+```
+```yml
+version: '3'
+
+services:
+  registry:
+    container_name: secure_registry
+    image: registry
+    ports:
+    - "5000:5000"
+    volumes:
+    - "${PWD}/certs/:/certs"
+    - "${PWD}/images/:/var/lib/registry"
+    - "${PWD}/auth:/auth"
+    environment:
+    - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+    - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+    - REGISTRY_AUTH=htpasswd
+    - REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
+    - REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password
+ ```bash
+ # docker-compose up -d --force-recreate
+ ```
+ # Test Docker Registry Authentication
+ 
+ ```bash
+# docker login localhost:5000
+Username: testuser
+Password: password
+ ```
