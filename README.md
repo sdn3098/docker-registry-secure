@@ -30,7 +30,7 @@ example
    
    <your ip>  repo.docker.local
    
-# systemctl restart doceker
+# systemctl restart docker
 ```
 ## Creating docker-compose file
 ```bash
@@ -54,4 +54,13 @@ services:
     - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
     - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
  
+ ```bash
+ # docker-compose up -d
+ ```
+ # Test Docker Registry
+ 
+ ```bash
+ # docker create alpine
+ # docekr image tag alpine repo.docker.local:5000/alpine
+ # docker push repo.docker.local:5000/alpine
     
