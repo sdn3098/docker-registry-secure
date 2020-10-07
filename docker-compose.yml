@@ -9,7 +9,10 @@ services:
     volumes:
     - "${PWD}/certs/:/certs"
     - "${PWD}/images/:/var/lib/registry"
+    - "${PWD}/auth:/auth"
     environment:
     - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
     - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
-
+    - REGISTRY_AUTH=htpasswd
+    - REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
+    - REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password
